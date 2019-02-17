@@ -20,6 +20,8 @@ func Println(m interface{}) {
 			return keys[i].Uint() < keys[j].Uint()
 		case reflect.String:
 			return keys[i].String() < keys[j].String()
+		case reflect.Float32, reflect.Float64:
+			return keys[i].Float() < keys[j].Float()
 		default:
 			log.Panicf("unsupported key type: %v", keys[i].Type())
 		}
