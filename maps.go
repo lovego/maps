@@ -9,8 +9,12 @@ import (
 )
 
 // Println print a map with keys in order.
-func Println(m interface{}) {
-	fmt.Println(Sprint(m))
+func Println(maps ...interface{}) {
+	var result = make([]interface{}, len(maps))
+	for i, m := range maps {
+		result[i] = Sprint(m)
+	}
+	fmt.Println(result...)
 }
 
 func Sprint(m interface{}) string {
