@@ -22,6 +22,16 @@ func ExamplePrintln_intKeys() {
 	// Output: map[1:a 2:b 3:c]
 }
 
+func ExamplePrintln_stringIntKeys() {
+	var m = map[string]map[int]int{
+		"b": {3: 3, 2: 2},
+		"a": {2: 1},
+		"c": {2: 1, 3: 2},
+	}
+	Println(m)
+	// Output: map[a:map[2:1] b:map[2:2 3:3] c:map[2:1 3:2]]
+}
+
 func ExamplePrintln_uintKeys() {
 	var m = map[uint]string{
 		2: "b",

@@ -10,6 +10,10 @@ import (
 
 // Println print a map with keys in order.
 func Println(m interface{}) {
+	fmt.Println(Sprint(m))
+}
+
+func Sprint(m interface{}) string {
 	mapV := reflect.ValueOf(m)
 	keys := mapV.MapKeys()
 	sort.Slice(keys, func(i, j int) bool {
@@ -29,7 +33,11 @@ func Println(m interface{}) {
 	})
 	slice := []string{}
 	for _, key := range keys {
-		slice = append(slice, fmt.Sprintf("%v:%v", key, mapV.MapIndex(key)))
+		if value := mapV.MapIndex(key); value.Kind() == reflect.Map {
+			slice = append(slice, fmt.Sprintf("%v:%v", key, Sprint(value.Interface())))
+		} else {
+			slice = append(slice, fmt.Sprintf("%v:%v", key, value))
+		}
 	}
-	fmt.Printf("map[%s]\n", strings.Join(slice, " "))
+	return fmt.Sprintf("map[%s]", strings.Join(slice, " "))
 }
