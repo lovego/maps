@@ -60,3 +60,9 @@ func ExamplePrintln_unsupportedKeys() {
 	Println(m)
 	// Output: unsupported key type: bool
 }
+
+func ExamplePrintln_nonMap() {
+	var p *int
+	Println(1, nil, p)
+	// Output: 1 <nil> <nil>
+}

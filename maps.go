@@ -18,6 +18,9 @@ func Println(maps ...interface{}) {
 }
 
 func Sprint(m interface{}) string {
+	if m == nil || reflect.TypeOf(m).Kind() != reflect.Map {
+		return fmt.Sprint(m)
+	}
 	mapV := reflect.ValueOf(m)
 	keys := mapV.MapKeys()
 	sort.Slice(keys, func(i, j int) bool {
